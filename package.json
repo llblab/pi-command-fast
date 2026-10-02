@@ -1,0 +1,49 @@
+{
+  "name": "@llblab/pi-command-fast",
+  "version": "0.1.0",
+  "description": "Shared Fast command arbitration and per-model JSONC overrides for Pi consumers",
+  "private": false,
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/llblab/pi-command-fast.git"
+  },
+  "engines": {
+    "node": ">=22.19.0"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist/",
+    "README.md",
+    "AGENTS.md",
+    "BACKLOG.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "npm run build && node --test tests/*.test.mjs",
+    "test:pi": "node scripts/test-packed-pi.mjs",
+    "check": "node -e \"import('./dist/index.js').then(() => console.log('pi-command-fast: library import ok'))\"",
+    "pack:dry": "npm pack --dry-run",
+    "validate": "npm run test && npm run check && npm audit --omit=peer && npm run pack:dry",
+    "prepack": "npm run build"
+  },
+  "dependencies": {
+    "jsonc-parser": "^3.3.1"
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": ">=1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.9.0"
+  }
+}
